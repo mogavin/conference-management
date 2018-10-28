@@ -1,0 +1,37 @@
+{
+  "name": "conference-management",
+  "version": "1.0.0",
+  "description": "A conference track management",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --watch",
+    "lint": "eslint --debug src/",
+    "lint:write": "eslint --debug src/ --fix",
+    "prettier": "prettier --write src/**/*.js"
+  },
+  "author": "Andre Gavino",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.(js|jsx)": [
+      "npm run lint:write",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jest": "^21.18.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "husky": "^1.1.2",
+    "jest": "^23.6.0",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3"
+  }
+}
