@@ -6,8 +6,7 @@
   "scripts": {
     "test": "jest --watch",
     "lint": "eslint --debug src/",
-    "lint:write": "eslint --debug src/ --fix",
-    "prettier": "prettier --write src/**/*.js"
+    "lint:write": "eslint --debug src/ --fix"
   },
   "author": "Andre Gavino",
   "license": "ISC",
