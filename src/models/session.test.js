@@ -65,8 +65,8 @@ describe("Session", () => {
     });
   });
 
-  describe("com evento", () => {
-    it("cuja data de inicio seja igual a data final da session, deve distribuir proposals inserindo este evento ao final", () => {
+  describe("com evento ao final, deve distribuir proposals inseridas no intervalo", () => {
+    it("onde a data de inicio do evento seja igual a data final da session", () => {
       const name = "Morning",
         start = getUtcDate(2018, 9, 22, 9),
         end = getUtcDate(2018, 9, 22, 12),
@@ -106,5 +106,99 @@ describe("Session", () => {
 
       assert.deepEqual(actual, expected);
     });
+
+    it("onde a data de inicio do evento seja menor que data final da session", () => {
+      const name = "Afternoon",
+        start = getUtcDate(2018, 9, 22, 13),
+        end = getUtcDate(2018, 9, 22, 17),
+        event = {
+          name: "Networking Event",
+          start: getUtcDate(2018, 9, 22, 16)
+        };
+      let morningSession = session(name, start, end, { event });
+
+      PROPOSALS.forEach(proposal => {
+        morningSession = morningSession.addTalk(proposal);
+      });
+
+      const actual = morningSession.talks,
+        expected = [
+          {
+            name: "Writing Fast Tests Against Enterprise Rails",
+            start: getUtcDate(2018, 9, 22, 13)
+          },
+          {
+            name: "Overdoing it in Python",
+            start: getUtcDate(2018, 9, 22, 14)
+          },
+          {
+            name: "Lua for the Masses",
+            start: getUtcDate(2018, 9, 22, 14, 45)
+          },
+          {
+            name: "Ruby Errors from Mismatched Gem Versions",
+            start: getUtcDate(2018, 9, 22, 15, 15)
+          },
+          {
+            name: "Common Ruby Errors",
+            start: getUtcDate(2018, 9, 22, 16)
+          },
+          {
+            name: "Networking Event",
+            start: getUtcDate(2018, 9, 22, 16, 45)
+          }
+        ];
+
+      console.log(actual);
+      console.log(expected);
+
+      assert.deepEqual(actual, expected);
+    });
   });
+
+  it.each([
+    [
+      "caso não tenha evento e ainda não tenha sido utilizado todo o intervalo disponível",
+      undefined,
+      getUtcDate(2018, 9, 22, 11),
+      true
+    ],
+    [
+      "caso não tenha evento e tenha sido utilizado todo o intervalo disponível",
+      undefined,
+      getUtcDate(2018, 9, 22, 12),
+      false
+    ],
+    [
+      "caso tenha evento e ainda não tenha sido utilizado todo o intervalo disponível",
+      {
+        name: "Lunch",
+        start: getUtcDate(2018, 9, 22, 11)
+      },
+      getUtcDate(2018, 9, 22, 11),
+      true
+    ],
+    [
+      "caso tenha evento e tenha sido utilizado todo o intervalo disponível",
+      {
+        name: "Lunch",
+        start: getUtcDate(2018, 9, 22, 10),
+        end: getUtcDate(2018, 9, 22, 11)
+      },
+      getUtcDate(2018, 9, 22, 11),
+      false
+    ]
+  ])(
+    "deve informar a possibilidade de inserção de novas proposals %s",
+    (testCase, event, availableTime, expected) => {
+      const name = "Morning",
+        start = getUtcDate(2018, 9, 22, 9),
+        end = getUtcDate(2018, 9, 22, 12),
+        morningSession = session(name, start, end, { event, availableTime });
+
+      const actual = morningSession.hasTime({ length: 0 });
+
+      assert.equal(actual, expected);
+    }
+  );
 });
