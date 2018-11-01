@@ -1,6 +1,6 @@
 const { assert } = require("chai"),
-  session = require("./session"),
-  { getUtcHour } = require("../util/date");
+  session = require("./index"),
+  { getUtcHour } = require("../../util/date");
 
 describe("Session", () => {
   const PROPOSALS = [

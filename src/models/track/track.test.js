@@ -1,8 +1,8 @@
 const sinon = require("sinon"),
   stub = sinon.stub,
   { assert } = require("chai"),
-  track = require("./track"),
-  { getUtcHour } = require("../util/date");
+  track = require("./index"),
+  { getUtcHour } = require("../../util/date");
 
 describe("Track", () => {
   it.each([

@@ -1,5 +1,5 @@
-const session = require("./session"),
-  { getUtcHour } = require("../util/date");
+const session = require("../session"),
+  { getUtcHour } = require("../../util/date");
 
 const _getMorningSession = () => {
     const lunch = {

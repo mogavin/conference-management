@@ -1,8 +1,8 @@
 const sinon = require("sinon"),
   stub = sinon.stub,
   { assert } = require("chai"),
-  conference = require("./conference"),
-  { getUtcHour } = require("../util/date");
+  conference = require("./index"),
+  { getUtcHour } = require("../../util/date");
 
 describe("Conference", () => {
   it("deve criar tracks de acordo com a quantidade de proposals", () => {

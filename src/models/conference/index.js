@@ -1,4 +1,4 @@
-const _track = require("./track");
+const _track = require("../track");
 
 const conference = (proposals, { track = _track } = {}) => {
   const tracks = [];
