@@ -144,13 +144,14 @@ describe("Session", () => {
             start: getUtcDate(2018, 9, 22, 16)
           },
           {
-            name: "Networking Event",
+            name: "Rails for Python Developers",
             start: getUtcDate(2018, 9, 22, 16, 45)
+          },
+          {
+            name: "Networking Event",
+            start: getUtcDate(2018, 9, 22, 16, 50)
           }
         ];
-
-      console.log(actual);
-      console.log(expected);
 
       assert.deepEqual(actual, expected);
     });
@@ -158,45 +159,25 @@ describe("Session", () => {
 
   it.each([
     [
-      "caso não tenha evento e ainda não tenha sido utilizado todo o intervalo disponível",
-      undefined,
+      "retorna true caso tenha intervalo disponível para encaixar a proposal",
+      { length: 45 },
       getUtcDate(2018, 9, 22, 11),
-      true
-    ],
-    [
-      "caso não tenha evento e tenha sido utilizado todo o intervalo disponível",
-      undefined,
       getUtcDate(2018, 9, 22, 12),
-      false
-    ],
-    [
-      "caso tenha evento e ainda não tenha sido utilizado todo o intervalo disponível",
-      {
-        name: "Lunch",
-        start: getUtcDate(2018, 9, 22, 11)
-      },
-      getUtcDate(2018, 9, 22, 11),
       true
     ],
     [
-      "caso tenha evento e tenha sido utilizado todo o intervalo disponível",
-      {
-        name: "Lunch",
-        start: getUtcDate(2018, 9, 22, 10),
-        end: getUtcDate(2018, 9, 22, 11)
-      },
-      getUtcDate(2018, 9, 22, 11),
+      "retorna false caso não tenha intervalo para encaixar a proposal",
+      { length: 60 },
+      getUtcDate(2018, 9, 22, 16, 45),
+      getUtcDate(2018, 9, 22, 17),
       false
     ]
   ])(
-    "deve informar a possibilidade de inserção de novas proposals %s",
-    (testCase, event, availableTime, expected) => {
-      const name = "Morning",
-        start = getUtcDate(2018, 9, 22, 9),
-        end = getUtcDate(2018, 9, 22, 12),
-        morningSession = session(name, start, end, { event, availableTime });
+    "ao informar a possibilidade de inserção de novas proposals %s",
+    (testCase, proposal, availableTime, end, expected) => {
+      const morningSession = session("Morning", new Date(), end, { availableTime });
 
-      const actual = morningSession.hasTime({ length: 0 });
+      const actual = morningSession.hasTime(proposal);
 
       assert.equal(actual, expected);
     }
