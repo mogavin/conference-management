@@ -89,8 +89,8 @@ describe("Conference", () => {
     const { tracks } = conference(PROPOSALS);
 
     tracks.forEach(({ morning, afternoon }) => {
-      console.log(morning.talks);
-      console.log(afternoon.talks);
+      //morning.talks.forEach(({toString}) => console.log(toString()));
+      //afternoon.talks.forEach(({toString}) => console.log(toString()));
     });
   });
 });

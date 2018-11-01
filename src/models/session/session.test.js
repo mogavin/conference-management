@@ -61,6 +61,9 @@ describe("Session", () => {
           }
         ];
 
+      console.log(actual);
+      console.log(expected);
+
       assert.deepEqual(actual, expected);
     });
   });

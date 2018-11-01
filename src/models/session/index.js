@@ -1,4 +1,5 @@
-const { addMinutes } = require("../../util/date");
+const { talk } = require("../talk"),
+  { addMinutes } = require("../../util/date");
 
 const session = (
   name,
@@ -15,7 +16,7 @@ const session = (
         hasAvailableTime = hasTime({ length });
 
       if (hasAvailableTime) {
-        talks.splice(spliceIndex, 0, { name, start: availableTime });
+        talks.splice(spliceIndex, 0, talk({ name, start: availableTime, length }));
         availableTime = addMinutes(availableTime, length);
         event && availableTime > event.start && (event.start = availableTime);
       }
