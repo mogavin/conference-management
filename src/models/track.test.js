@@ -5,49 +5,6 @@ const sinon = require("sinon"),
   { getUtcHour } = require("../util/date");
 
 describe("Track", () => {
-  const PROPOSALS = [
-    {
-      name: "Writing Fast Tests Against Enterprise Rails",
-      length: 60
-    },
-    {
-      name: "Overdoing it in Python",
-      length: 45
-    },
-    {
-      name: "Lua for the Masses",
-      length: 30
-    },
-    {
-      name: "Ruby Errors from Mismatched Gem Versions",
-      length: 45
-    },
-    {
-      name: "Ruby on Rails: Why We Should Move On",
-      length: 60
-    },
-    {
-      name: "Common Ruby Errors",
-      length: 45
-    },
-    {
-      name: "Pair Programming vs Noise",
-      length: 45
-    },
-    {
-      name: "Programming in the Boondocks of Seattle",
-      length: 30
-    },
-    {
-      name: "Ruby vs. Clojure for Back-End Development",
-      length: 30
-    },
-    {
-      name: "User Interface CSS in Rails App",
-      length: 30
-    }
-  ];
-
   it.each([
     [
       "retorna true caso tenha sessions da manhã e tarde disponíveis para encaixar a proposal",
