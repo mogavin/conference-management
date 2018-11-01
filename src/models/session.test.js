@@ -1,6 +1,6 @@
 const { assert } = require("chai"),
   session = require("./session"),
-  { getUtcDate } = require("../util/date");
+  { getUtcHour } = require("../util/date");
 
 describe("Session", () => {
   const PROPOSALS = [
@@ -33,8 +33,8 @@ describe("Session", () => {
   describe("sem evento", () => {
     it("deve distribuir proposals inseridas no intervalo, ignorando as que porventura o ultrapassem", () => {
       const name = "Morning",
-        start = getUtcDate(2018, 9, 22, 9),
-        end = getUtcDate(2018, 9, 22, 12);
+        start = getUtcHour(9),
+        end = getUtcHour(12);
       let morningSession = session(name, start, end);
 
       PROPOSALS.forEach(proposal => {
@@ -45,19 +45,19 @@ describe("Session", () => {
         expected = [
           {
             name: "Writing Fast Tests Against Enterprise Rails",
-            start: getUtcDate(2018, 9, 22, 9)
+            start: getUtcHour(9)
           },
           {
             name: "Overdoing it in Python",
-            start: getUtcDate(2018, 9, 22, 10)
+            start: getUtcHour(10)
           },
           {
             name: "Lua for the Masses",
-            start: getUtcDate(2018, 9, 22, 10, 45)
+            start: getUtcHour(10, 45)
           },
           {
             name: "Ruby Errors from Mismatched Gem Versions",
-            start: getUtcDate(2018, 9, 22, 11, 15)
+            start: getUtcHour(11, 15)
           }
         ];
 
@@ -68,11 +68,11 @@ describe("Session", () => {
   describe("com evento ao final, deve distribuir proposals inseridas no intervalo", () => {
     it("onde a data de inicio do evento seja igual a data final da session", () => {
       const name = "Morning",
-        start = getUtcDate(2018, 9, 22, 9),
-        end = getUtcDate(2018, 9, 22, 12),
+        start = getUtcHour(9),
+        end = getUtcHour(12),
         event = {
           name: "Lunch",
-          start: getUtcDate(2018, 9, 22, 12)
+          start: getUtcHour(12)
         };
       let morningSession = session(name, start, end, { event });
 
@@ -84,23 +84,23 @@ describe("Session", () => {
         expected = [
           {
             name: "Writing Fast Tests Against Enterprise Rails",
-            start: getUtcDate(2018, 9, 22, 9)
+            start: getUtcHour(9)
           },
           {
             name: "Overdoing it in Python",
-            start: getUtcDate(2018, 9, 22, 10)
+            start: getUtcHour(10)
           },
           {
             name: "Lua for the Masses",
-            start: getUtcDate(2018, 9, 22, 10, 45)
+            start: getUtcHour(10, 45)
           },
           {
             name: "Ruby Errors from Mismatched Gem Versions",
-            start: getUtcDate(2018, 9, 22, 11, 15)
+            start: getUtcHour(11, 15)
           },
           {
             name: "Lunch",
-            start: getUtcDate(2018, 9, 22, 12)
+            start: getUtcHour(12)
           }
         ];
 
@@ -109,11 +109,11 @@ describe("Session", () => {
 
     it("onde a data de inicio do evento seja menor que data final da session", () => {
       const name = "Afternoon",
-        start = getUtcDate(2018, 9, 22, 13),
-        end = getUtcDate(2018, 9, 22, 17),
+        start = getUtcHour(13),
+        end = getUtcHour(17),
         event = {
           name: "Networking Event",
-          start: getUtcDate(2018, 9, 22, 16)
+          start: getUtcHour(16)
         };
       let morningSession = session(name, start, end, { event });
 
@@ -125,31 +125,31 @@ describe("Session", () => {
         expected = [
           {
             name: "Writing Fast Tests Against Enterprise Rails",
-            start: getUtcDate(2018, 9, 22, 13)
+            start: getUtcHour(13)
           },
           {
             name: "Overdoing it in Python",
-            start: getUtcDate(2018, 9, 22, 14)
+            start: getUtcHour(14)
           },
           {
             name: "Lua for the Masses",
-            start: getUtcDate(2018, 9, 22, 14, 45)
+            start: getUtcHour(14, 45)
           },
           {
             name: "Ruby Errors from Mismatched Gem Versions",
-            start: getUtcDate(2018, 9, 22, 15, 15)
+            start: getUtcHour(15, 15)
           },
           {
             name: "Common Ruby Errors",
-            start: getUtcDate(2018, 9, 22, 16)
+            start: getUtcHour(16)
           },
           {
             name: "Rails for Python Developers",
-            start: getUtcDate(2018, 9, 22, 16, 45)
+            start: getUtcHour(16, 45)
           },
           {
             name: "Networking Event",
-            start: getUtcDate(2018, 9, 22, 16, 50)
+            start: getUtcHour(16, 50)
           }
         ];
 
@@ -161,15 +161,15 @@ describe("Session", () => {
     [
       "retorna true caso tenha intervalo disponível para encaixar a proposal",
       { length: 45 },
-      getUtcDate(2018, 9, 22, 11),
-      getUtcDate(2018, 9, 22, 12),
+      getUtcHour(11),
+      getUtcHour(12),
       true
     ],
     [
       "retorna false caso não tenha intervalo para encaixar a proposal",
       { length: 60 },
-      getUtcDate(2018, 9, 22, 16, 45),
-      getUtcDate(2018, 9, 22, 17),
+      getUtcHour(16, 45),
+      getUtcHour(17),
       false
     ]
   ])(

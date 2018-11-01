@@ -1,4 +1,4 @@
-const { getUtcDate, getMinutesDiff, addMinutes } = require("../util/date");
+const { addMinutes } = require("../util/date");
 
 const session = (
   name,

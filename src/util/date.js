@@ -1,5 +1,7 @@
-const getUtcDate = (year = 0, month = 0, day = 0, hour = 0, minute = 0) =>
-    new Date(Date.UTC(year, month, day, hour, minute)),
+const getUtcHour = (hour = 0, minute = 0) => {
+    const today = new Date();
+    return new Date(Date.UTC(today.getYear(), today.getMonth(), today.getDay(), hour, minute));
+  },
   getMinutesDiff = (start, end) => {
     const diff = Math.abs(start - end);
     return Math.floor(diff / 1000 / 60);
@@ -11,7 +13,7 @@ const getUtcDate = (year = 0, month = 0, day = 0, hour = 0, minute = 0) =>
   };
 
 module.exports = {
-  getUtcDate,
+  getUtcHour,
   getMinutesDiff,
   addMinutes
 };
