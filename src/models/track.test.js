@@ -1,7 +1,8 @@
-const { stub } = require("sinon"),
+const sinon = require("sinon"),
+  stub = sinon.stub,
   { assert } = require("chai"),
   track = require("./track"),
-  { getUtcDate } = require("../util/date");
+  { getUtcHour } = require("../util/date");
 
 describe("Track", () => {
   const PROPOSALS = [
@@ -22,12 +23,28 @@ describe("Track", () => {
       length: 45
     },
     {
+      name: "Ruby on Rails: Why We Should Move On",
+      length: 60
+    },
+    {
       name: "Common Ruby Errors",
       length: 45
     },
     {
-      name: "Rails for Python Developers",
-      length: 5
+      name: "Pair Programming vs Noise",
+      length: 45
+    },
+    {
+      name: "Programming in the Boondocks of Seattle",
+      length: 30
+    },
+    {
+      name: "Ruby vs. Clojure for Back-End Development",
+      length: 30
+    },
+    {
+      name: "User Interface CSS in Rails App",
+      length: 30
     }
   ];
 
@@ -77,4 +94,54 @@ describe("Track", () => {
       assert.equal(actual, expected);
     }
   );
+
+  it("caso tenha espaço, deve priorizar inserir proposals na session da manhã", () => {
+    const proposal = {
+        name: "I'm a proposal"
+      },
+      morningSession = {
+        hasTime: stub(),
+        addTalk: stub()
+      },
+      afternoonSession = {
+        hasTime: stub(),
+        addTalk: stub()
+      },
+      expected = "Tudo ok";
+
+    morningSession.hasTime.withArgs(proposal).returns(true);
+    morningSession.addTalk.withArgs(proposal).returns(expected);
+
+    const trackOne = track("Track 1", { morningSession, afternoonSession });
+
+    const actual = trackOne.addTalk(proposal).morning;
+
+    assert.deepEqual(actual, expected);
+    sinon.assert.notCalled(afternoonSession.addTalk);
+  });
+
+  it("caso não tenha espaço na session da manhã, deve tentar inserir na da tarde", () => {
+    const proposal = {
+        name: "I'm a proposal"
+      },
+      morningSession = {
+        hasTime: stub(),
+        addTalk: stub()
+      },
+      afternoonSession = {
+        hasTime: stub(),
+        addTalk: stub()
+      },
+      expected = "Tudo ok";
+
+    morningSession.hasTime.withArgs(proposal).returns(false);
+    afternoonSession.addTalk.withArgs(proposal).returns(expected);
+
+    const trackOne = track("Track 1", { morningSession, afternoonSession });
+
+    const actual = trackOne.addTalk(proposal).afternoon;
+
+    assert.deepEqual(actual, expected);
+    sinon.assert.notCalled(morningSession.addTalk);
+  });
 });
