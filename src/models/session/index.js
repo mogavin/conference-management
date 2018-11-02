@@ -1,24 +1,28 @@
-const { talk } = require("../talk"),
+const talk = require("../talk"),
   { addMinutes } = require("../../util/date");
 
 const session = (
   name,
   start,
   end,
-  { event, talks = event ? [event] : [], availableTime = start } = {}
+  { event, talks = event ? [talk(event)] : [], availableTime = start } = {}
 ) => {
   const hasTime = ({ length }) => {
       const withLength = addMinutes(availableTime, length);
       return withLength <= end;
     },
     addTalk = ({ name, length }) => {
-      const spliceIndex = event ? talks.length - 1 : talks.length,
-        hasAvailableTime = hasTime({ length });
+      const canAdd = hasTime({ length }),
+        updateTalks = proposal => {
+          const spliceIndex = event ? talks.length - 1 : talks.length;
+          talks.splice(spliceIndex, 0, talk(proposal));
+        },
+        updateEvent = newEvent => talks.splice(talks.length - 1, 1, talk(newEvent));
 
-      if (hasAvailableTime) {
-        talks.splice(spliceIndex, 0, talk({ name, start: availableTime, length }));
+      if (canAdd) {
+        updateTalks({ name, start: availableTime, length });
         availableTime = addMinutes(availableTime, length);
-        event && availableTime > event.start && (event.start = availableTime);
+        event && availableTime > event.start && updateEvent({ ...event, start: availableTime });
       }
 
       return session(name, start, end, { event, talks, availableTime });

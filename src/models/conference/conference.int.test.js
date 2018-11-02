@@ -64,10 +64,6 @@ describe("Conference", () => {
       length: 30
     },
     {
-      name: "Programming in the Boondocks of Seattle",
-      length: 30
-    },
-    {
       name: "Ruby vs. Clojure for Back-End Development",
       length: 30
     },
@@ -89,8 +85,9 @@ describe("Conference", () => {
     const { tracks } = conference(PROPOSALS);
 
     tracks.forEach(({ morning, afternoon }) => {
-      //morning.talks.forEach(({toString}) => console.log(toString()));
-      //afternoon.talks.forEach(({toString}) => console.log(toString()));
+      morning.talks.forEach(({ toString }) => console.log(toString()));
+      afternoon.talks.forEach(({ toString }) => console.log(toString()));
+      console.log("=================================================");
     });
   });
 });
