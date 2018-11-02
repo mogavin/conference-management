@@ -61,10 +61,7 @@ describe("Session", () => {
           }
         ];
 
-      console.log(actual);
-      console.log(expected);
-
-      assert.deepEqual(actual, expected);
+      expected.forEach((expectedTalk, i) => assert.deepInclude(actual[i], expectedTalk));
     });
   });
 
@@ -107,7 +104,7 @@ describe("Session", () => {
           }
         ];
 
-      assert.deepEqual(actual, expected);
+      expected.forEach((expectedTalk, i) => assert.deepInclude(actual[i], expectedTalk));
     });
 
     it("onde a data de inicio do evento seja menor que data final da session", () => {
@@ -156,7 +153,7 @@ describe("Session", () => {
           }
         ];
 
-      assert.deepEqual(actual, expected);
+      expected.forEach((expectedTalk, i) => assert.deepInclude(actual[i], expectedTalk));
     });
   });
 
