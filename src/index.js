@@ -1,17 +1,38 @@
-let person = {
-  name: "Yoda",
-  designation: "Jedi Master "
-};
+const proposal = require("./models/proposal"),
+  conference = require("./models/conference"),
+  readline = require("readline");
 
-function trainJedi(jediWarrion) {
-  if (jediWarrion.name === "Yoda") {
-    console.log("No need! already trained");
+console.log(`Insira talks no formato <Nome da talk> (<lenght>min | lightning).
+  Ex 1: Sit Down and Write 30min
+  Ex 2: Rails for Python Developers lightning
+  Digite :q para imprimir as tracks\n`);
+
+const proposals = [],
+  rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    prompt: "> "
+  });
+rl.prompt();
+rl.on("line", input => {
+  if (input !== ":q") {
+    try {
+      const newProposal = proposal(input);
+      proposals.push(newProposal);
+      rl.prompt();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      rl.prompt();
+    }
+  } else {
+    const { tracks } = conference(proposals);
+
+    tracks.forEach(({ morning, afternoon }) => {
+      morning.talks.forEach(({ toString }) => console.log(toString()));
+      afternoon.talks.forEach(({ toString }) => console.log(toString()));
+      console.log("=================================================");
+    });
+    rl.close();
   }
-  console.log(`Training ${jediWarrion.name} complete`);
-}
-
-trainJedi(person);
-trainJedi({
-  name: "Adeel",
-  designation: "padawan"
 });
