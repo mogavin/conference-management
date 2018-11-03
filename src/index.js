@@ -19,7 +19,6 @@ rl.on("line", input => {
     try {
       const newProposal = proposal(input);
       proposals.push(newProposal);
-      rl.prompt();
     } catch (err) {
       console.log(err);
     } finally {
@@ -27,12 +26,12 @@ rl.on("line", input => {
     }
   } else {
     const { tracks } = conference(proposals);
-
     tracks.forEach(({ morning, afternoon }) => {
       morning.talks.forEach(({ toString }) => console.log(toString()));
       afternoon.talks.forEach(({ toString }) => console.log(toString()));
       console.log("=================================================");
     });
-    rl.close();
+
+    process.exit(0);
   }
 });

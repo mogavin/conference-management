@@ -2,10 +2,11 @@ const proposal = input => {
   const isValid = /^([^0-9]+)\s(\d{2}min|lightning)$/.test(input);
 
   if (isValid) {
-    const lengthType = input.includes("min") ? "min" : "lightning",
+    const isMin = /\d{2}min$/.exec(input),
+      lengthType = isMin ? isMin[0] : "lightning",
       isLightning = lengthType === "lightning",
-      name = input.substring(0, input.indexOf(lengthType) - (isLightning ? 1 : 3)),
-      length = isLightning ? 5 : parseInt(input.substr(input.indexOf(lengthType) - 2, 2));
+      name = input.substring(0, input.indexOf(lengthType) - 1),
+      length = isLightning ? 5 : parseInt(lengthType.substr(0, 2));
 
     return {
       name,

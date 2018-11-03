@@ -5,10 +5,10 @@ describe("Proposal", () => {
   it.each([
     [
       "extraindo o nome e a length",
-      "Ruby on Rails: Why We Should Move On 60min",
+      "Programming in the Boondocks of Seattle 30min",
       {
-        name: "Ruby on Rails: Why We Should Move On",
-        length: 60
+        name: "Programming in the Boondocks of Seattle",
+        length: 30
       }
     ],
     [
