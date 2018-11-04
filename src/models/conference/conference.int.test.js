@@ -83,6 +83,6 @@ describe("Conference", () => {
 
   it("teste integração", () => {
     const actual = conference(PROPOSALS).toString();
-    console.log(actual);
+    //console.log(actual);
   });
 });
