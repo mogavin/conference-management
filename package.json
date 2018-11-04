@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "jest --watch --verbose",
+    "test": "jest --env=node --watch --verbose",
     "lint": "eslint --debug src/",
     "lint:write": "eslint --debug src/ --fix"
   },
@@ -14,7 +14,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "jest --forceExit"
+      "pre-push": "jest --env=node"
     }
   },
   "lint-staged": {

@@ -28,15 +28,16 @@ const track = (
 
       return track(name, { morningSession, afternoonSession });
     },
-    toString = () => `Track ${name}:\n\n${morningSession.toString()}${afternoonSession.toString()}`;
+    toString = () =>
+      `Track ${name}:\n\n${morningSession.toString()}\n\n${afternoonSession.toString()}`;
 
-  return {
+  return Object.freeze({
     hasTime,
     addTalk,
     toString,
     morning: morningSession,
     afternoon: afternoonSession
-  };
+  });
 };
 
 module.exports = track;

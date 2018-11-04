@@ -200,7 +200,7 @@ describe("Session", () => {
     ];
 
     const actual = session("Morning", new Date(), new Date(), { talks }).toString(),
-      expected = `MORNING_TALK_1\n\nMORNING_TALK_2\n\nMORNING_TALK_3\n\nMORNING_TALK_4\n\n`;
+      expected = `MORNING_TALK_1\n\nMORNING_TALK_2\n\nMORNING_TALK_3\n\nMORNING_TALK_4`;
 
     assert.equal(actual, expected);
   });

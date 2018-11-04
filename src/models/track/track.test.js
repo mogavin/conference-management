@@ -111,7 +111,7 @@ describe("Track", () => {
       };
 
     const actual = track("1", { morningSession, afternoonSession }).toString(),
-      expected = `Track 1:\n\nMORNING_SESSIONAFTERNOON_SESSION`;
+      expected = `Track 1:\n\nMORNING_SESSION\n\nAFTERNOON_SESSION`;
 
     assert.equal(actual, expected);
   });

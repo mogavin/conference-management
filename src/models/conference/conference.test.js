@@ -49,7 +49,7 @@ describe("Conference", () => {
     ];
 
     const actual = conference([], { tracks }).toString(),
-      expected = `TRACK_1\n\n\n\nTRACK_2\n\n\n\n`;
+      expected = `TRACK_1\n\n\n\nTRACK_2`;
 
     assert.equal(actual, expected);
   });

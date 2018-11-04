@@ -25,13 +25,8 @@ rl.on("line", input => {
       rl.prompt();
     }
   } else {
-    const { tracks } = conference(proposals);
-    tracks.forEach(({ morning, afternoon }) => {
-      morning.talks.forEach(({ toString }) => console.log(toString()));
-      afternoon.talks.forEach(({ toString }) => console.log(toString()));
-      console.log("=================================================");
-    });
-
+    const theConference = conference(proposals);
+    console.log(`${theConference}\n\n\n\n`);
     process.exit(0);
   }
 });

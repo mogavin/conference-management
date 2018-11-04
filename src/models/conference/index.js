@@ -18,7 +18,7 @@ const conference = (proposals, { tracks = [], trackFactory = _track } = {}) => {
 
   return Object.freeze({
     tracks,
-    toString: () => tracks.reduce((print, track) => (print += `${track.toString()}\n\n\n\n`), "")
+    toString: () => tracks.map(track => track.toString()).join(`\n\n\n\n`)
   });
 };
 
