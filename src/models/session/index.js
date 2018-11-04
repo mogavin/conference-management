@@ -29,11 +29,13 @@ const session = (
       }
 
       return session(name, start, end, { event, talks, availableTime });
-    };
+    },
+    toString = () => talks.reduce((print, talk) => (print += `${talk.toString()}\n\n`), "");
 
   return {
     addTalk,
     hasTime,
+    toString,
     talks
   };
 };

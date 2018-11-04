@@ -182,4 +182,26 @@ describe("Session", () => {
       assert.equal(actual, expected);
     }
   );
+
+  it("deve imprimir uma descrição formatada", () => {
+    const talks = [
+      {
+        toString: () => "MORNING_TALK_1"
+      },
+      {
+        toString: () => "MORNING_TALK_2"
+      },
+      {
+        toString: () => "MORNING_TALK_3"
+      },
+      {
+        toString: () => "MORNING_TALK_4"
+      }
+    ];
+
+    const actual = session("Morning", new Date(), new Date(), { talks }).toString(),
+      expected = `MORNING_TALK_1\n\nMORNING_TALK_2\n\nMORNING_TALK_3\n\nMORNING_TALK_4\n\n`;
+
+    assert.equal(actual, expected);
+  });
 });

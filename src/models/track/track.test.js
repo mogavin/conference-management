@@ -44,7 +44,7 @@ describe("Track", () => {
       morningSession.hasTime.withArgs(proposal).returns(hasTimeMorning);
       afternoonSession.hasTime.withArgs(proposal).returns(hasTimeAfternoon);
 
-      const trackOne = track("Track 1", { morningSession, afternoonSession });
+      const trackOne = track("1", { morningSession, afternoonSession });
 
       const actual = trackOne.hasTime(proposal);
 
@@ -94,7 +94,7 @@ describe("Track", () => {
     morningSession.hasTime.withArgs(proposal).returns(false);
     afternoonSession.addTalk.withArgs(proposal).returns(expected);
 
-    const trackOne = track("Track 1", { morningSession, afternoonSession });
+    const trackOne = track("1", { morningSession, afternoonSession });
 
     const actual = trackOne.addTalk(proposal).afternoon;
 

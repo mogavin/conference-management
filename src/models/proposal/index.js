@@ -12,7 +12,7 @@ const proposal = input => {
       name,
       length
     };
-  } else throw "Input incorreto. O formato deve ser <Nome da talk> (<lenght>min | lightning)";
+  } else throw "Input incorreto. O formato deve ser <Nome da talk> (<XX>min | lightning)";
 };
 
 module.exports = proposal;

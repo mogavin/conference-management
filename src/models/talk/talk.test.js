@@ -23,14 +23,14 @@ describe("Talk", () => {
       "10:45AM Overdoing it in Python 45min"
     ],
     [
-      "caso não exista length, não deve imprimí-lo",
+      "onde caso não exista length não deve imprimí-lo",
       {
         name: "Lunch",
         start: getUtcHour(12)
       },
       "12:00PM Lunch"
     ]
-  ])("deve ter uma descrição formatadas %s", (testCase, proposal, expected) => {
+  ])("deve imprimir uma descrição formatada %s", (testCase, proposal, expected) => {
     const actual = talk(proposal).toString();
 
     assert.equal(actual, expected);

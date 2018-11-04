@@ -2,10 +2,10 @@ const proposal = require("./models/proposal"),
   conference = require("./models/conference"),
   readline = require("readline");
 
-console.log(`Insira talks no formato <Nome da talk> (<lenght>min | lightning).
+console.log(`Insira talks no formato <Nome da talk> (<XX>min | lightning).
   Ex 1: Sit Down and Write 30min
   Ex 2: Rails for Python Developers lightning
-  Digite :q para imprimir as tracks\n`);
+  Digite :q para finalizar e imprimir as tracks\n`);
 
 const proposals = [],
   rl = readline.createInterface({
