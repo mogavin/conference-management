@@ -101,4 +101,18 @@ describe("Track", () => {
     assert.deepEqual(actual, expected);
     sinon.assert.notCalled(morningSession.addTalk);
   });
+
+  it("deve ter uma descrição formatada", () => {
+    const morningSession = {
+        toString: () => "MORNING_SESSION"
+      },
+      afternoonSession = {
+        toString: () => "AFTERNOON_SESSION"
+      };
+
+    const actual = track("1", { morningSession, afternoonSession }).toString(),
+      expected = `Track 1:\n\nMORNING_SESSIONAFTERNOON_SESSION`;
+
+    assert.equal(actual, expected);
+  });
 });

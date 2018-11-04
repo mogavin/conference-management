@@ -27,11 +27,13 @@ const track = (
       else afternoonSession = afternoonSession.addTalk(proposal);
 
       return track(name, { morningSession, afternoonSession });
-    };
+    },
+    toString = () => `Track ${name}:\n\n${morningSession.toString()}${afternoonSession.toString()}`;
 
   return {
     hasTime,
     addTalk,
+    toString,
     morning: morningSession,
     afternoon: afternoonSession
   };
