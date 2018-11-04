@@ -32,12 +32,12 @@ const session = (
     },
     toString = () => talks.reduce((print, talk) => (print += `${talk.toString()}\n\n`), "");
 
-  return {
+  return Object.freeze({
     addTalk,
     hasTime,
     toString,
     talks
-  };
+  });
 };
 
 module.exports = session;

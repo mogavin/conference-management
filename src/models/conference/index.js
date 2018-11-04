@@ -16,10 +16,10 @@ const conference = (proposals, { tracks = [], trackFactory = _track } = {}) => {
     tracks.push(newTrack);
   }
 
-  return {
+  return Object.freeze({
     tracks,
     toString: () => tracks.reduce((print, track) => (print += `${track.toString()}\n\n\n\n`), "")
-  };
+  });
 };
 
 module.exports = conference;

@@ -1,5 +1,5 @@
 const talk = ({ name, start, length }) => {
-  return {
+  return Object.freeze({
     name,
     start,
     toString: () => {
@@ -9,7 +9,7 @@ const talk = ({ name, start, length }) => {
 
       return `${startDesc} ${name}${lengthDesc}`;
     }
-  };
+  });
 };
 
 module.exports = talk;

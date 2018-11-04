@@ -8,10 +8,10 @@ const proposal = input => {
       name = input.substring(0, input.indexOf(lengthType) - 1),
       length = isLightning ? 5 : parseInt(lengthType.substr(0, 2));
 
-    return {
+    return Object.freeze({
       name,
       length
-    };
+    });
   } else throw "Input incorreto. O formato deve ser <Nome da talk> (<XX>min | lightning)";
 };
 
