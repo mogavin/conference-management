@@ -82,12 +82,7 @@ describe("Conference", () => {
   ];
 
   it("teste integração", () => {
-    const { tracks } = conference(PROPOSALS);
-
-    tracks.forEach(({ morning, afternoon }) => {
-      console.log(morning.toString());
-      console.log(afternoon.toString());
-      console.log("=================================================");
-    });
+    const actual = conference(PROPOSALS).toString();
+    console.log(actual);
   });
 });

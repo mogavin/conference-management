@@ -1,8 +1,6 @@
 const _track = require("../track");
 
-const conference = (proposals, { track = _track } = {}) => {
-  const tracks = [];
-
+const conference = (proposals, { tracks = [], trackFactory = _track } = {}) => {
   while (proposals.length) {
     const toRemove = [],
       newTrack = proposals.reduce((track, proposal, i) => {
@@ -11,7 +9,7 @@ const conference = (proposals, { track = _track } = {}) => {
           return track.addTalk(proposal);
         }
         return track;
-      }, track(tracks.length));
+      }, trackFactory(tracks.length + 1));
 
     while (toRemove.length) proposals.splice(toRemove.pop(), 1);
 
@@ -19,7 +17,8 @@ const conference = (proposals, { track = _track } = {}) => {
   }
 
   return {
-    tracks
+    tracks,
+    toString: () => tracks.reduce((print, track) => (print += `${track.toString()}\n\n\n\n`), "")
   };
 };
 

@@ -17,8 +17,8 @@ describe("Conference", () => {
       },
       trackFactory = stub();
 
-    trackFactory.withArgs(0).returns(trackOne);
-    trackFactory.withArgs(1).returns(trackTwo);
+    trackFactory.withArgs(1).returns(trackOne);
+    trackFactory.withArgs(2).returns(trackTwo);
 
     trackOne.hasTime.withArgs("PROP_0").returns(true);
     trackOne.hasTime.withArgs("PROP_2").returns(true);
@@ -32,9 +32,25 @@ describe("Conference", () => {
     trackTwo.addTalk.withArgs("PROP_3").returns(trackTwo);
     trackTwo.addTalk.withArgs("PROP_4").returns(trackTwo);
 
-    const actual = conference(proposals, { track: trackFactory }).tracks,
+    const actual = conference(proposals, { trackFactory }).tracks,
       expected = [trackOne, trackTwo];
 
     assert.deepEqual(actual, expected);
+  });
+
+  it("deve ter uma descrição formatada", () => {
+    const tracks = [
+      {
+        toString: () => "TRACK_1"
+      },
+      {
+        toString: () => "TRACK_2"
+      }
+    ];
+
+    const actual = conference([], { tracks }).toString(),
+      expected = `TRACK_1\n\n\n\nTRACK_2\n\n\n\n`;
+
+    assert.equal(actual, expected);
   });
 });
