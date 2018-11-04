@@ -1,24 +1,24 @@
-const session = require("../session"),
-  { getUtcHour } = require("../../util/date");
+const session = require('../session'),
+  { getUtcHour } = require('../../util/date');
 
 const _getMorningSession = () => {
     const lunch = {
-      name: "Lunch",
-      start: getUtcHour(12)
+      name: 'Lunch',
+      start: getUtcHour(12),
     };
-    return session("Morning", getUtcHour(9), getUtcHour(12), { event: lunch });
+    return session('Morning', getUtcHour(9), getUtcHour(12), { event: lunch });
   },
   _getAfternoonSession = () => {
     const network = {
-      name: "Networking Event",
-      start: getUtcHour(16)
+      name: 'Networking Event',
+      start: getUtcHour(16),
     };
-    return session("Afternoon", getUtcHour(13), getUtcHour(17), { event: network });
+    return session('Afternoon', getUtcHour(13), getUtcHour(17), { event: network });
   };
 
 const track = (
   name,
-  { morningSession = _getMorningSession(), afternoonSession = _getAfternoonSession() } = {}
+  { morningSession = _getMorningSession(), afternoonSession = _getAfternoonSession() } = {},
 ) => {
   const hasTime = proposal =>
       morningSession.hasTime(proposal) || afternoonSession.hasTime(proposal),
@@ -36,7 +36,7 @@ const track = (
     addTalk,
     toString,
     morning: morningSession,
-    afternoon: afternoonSession
+    afternoon: afternoonSession,
   });
 };
 

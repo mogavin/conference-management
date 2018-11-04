@@ -1,4 +1,4 @@
-const _track = require("../track");
+const _track = require('../track');
 
 const conference = (proposals, { tracks = [], trackFactory = _track } = {}) => {
   while (proposals.length) {
@@ -18,7 +18,7 @@ const conference = (proposals, { tracks = [], trackFactory = _track } = {}) => {
 
   return Object.freeze({
     tracks,
-    toString: () => tracks.map(track => track.toString()).join(`\n\n\n\n`)
+    toString: () => tracks.map(track => track.toString()).join(`\n\n\n\n`),
   });
 };
 

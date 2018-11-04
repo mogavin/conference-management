@@ -3,7 +3,7 @@ module.exports = {
 		es6: true,
 		node: true,
 	},
-	extends: ['plugin:jest/recommended', 'plugin:prettier/recommended'],
+	extends: ['last', 'plugin:jest/recommended', 'plugin:prettier/recommended'],
 	plugins: [
 		'babel',
 		'import',

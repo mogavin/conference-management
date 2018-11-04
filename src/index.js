@@ -1,6 +1,8 @@
-const proposal = require("./models/proposal"),
-  conference = require("./models/conference"),
-  readline = require("readline");
+/*eslint-disable no-console*/
+
+const proposal = require('./models/proposal'),
+  conference = require('./models/conference'),
+  readline = require('readline');
 
 console.log(`Insira talks no formato <Nome da talk> (<XX>min | lightning).
   Ex 1: Sit Down and Write 30min
@@ -11,11 +13,11 @@ const proposals = [],
   rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: "> "
+    prompt: '> ',
   });
 rl.prompt();
-rl.on("line", input => {
-  if (input !== ":q") {
+rl.on('line', input => {
+  if (input !== ':q') {
     try {
       const newProposal = proposal(input);
       proposals.push(newProposal);

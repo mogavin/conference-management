@@ -1,11 +1,11 @@
-const talk = require("../talk"),
-  { addMinutes } = require("../../util/date");
+const talk = require('../talk'),
+  { addMinutes } = require('../../util/date');
 
 const session = (
   name,
   start,
   end,
-  { event, talks = event ? [talk(event)] : [], availableTime = start } = {}
+  { event, talks = event ? [talk(event)] : [], availableTime = start } = {},
 ) => {
   const hasTime = ({ length }) => {
       const withLength = addMinutes(availableTime, length);
@@ -36,7 +36,7 @@ const session = (
     addTalk,
     hasTime,
     toString,
-    talks
+    talks,
   });
 };
 
