@@ -28,9 +28,9 @@ npm start
 
 Quando surgir o prompt na tela siga os passos abaixo: 
 
-* A talk deve ser um texto no formato`<Nome da talk> (<XX>min | lightning)`: 
-    * Ex 1: Sit Down and Write 30min 
-    * Ex 2: Rails for Python Developers lightning
+* A talk deve ser um texto no formato`<Nome da talk> (<XX>min | lightning)`. Exemplos: 
+    * Sit Down and Write 30min 
+    * Rails for Python Developers lightning
 
 * Após inserir, tecle `ENTER` para confirmar e inserir a próxima talk;
 
