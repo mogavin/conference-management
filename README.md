@@ -57,4 +57,4 @@ npm test
 
   * Foi criada a pasta `util` para isolar as funções de manipulação de data necessárias para a aplicacão. Para o desenvolvimento destas funções foram utilizados apenas os recursos nativos da linguagem;
 
-  * Para padronizar a identação, facilitar a remoção e identificação de erros no código foram adicionadas as dependências `prettier` e `eslint`. Para os testes foi utilizado o runner `jest`, juntamente com as API's `sinon` e `chai` para criação de stubs e asserções, respectivamente. Outras ferramentas utilizadas (`husky`,`lint-staged`) tem o objetivo de assegurar a execução das ferramentas de qualidade durante cada alteração.
+  * Para padronizar a indentação, identificar e facilitar a remoção de erros do código foram adicionadas as dependências `prettier` e `eslint`. Para os testes foi utilizado o runner `jest`, juntamente com as API's `sinon` e `chai` para criação de stubs e asserções, respectivamente. Outras ferramentas utilizadas (`husky`,`lint-staged`) tem o objetivo de assegurar a execução das ferramentas de qualidade durante cada alteração.
